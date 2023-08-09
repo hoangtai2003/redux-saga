@@ -1,4 +1,5 @@
 import { legacy_createStore, compose, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import rootReducer from "../reducers";
 const composeEnhancers = process.env.NODE_ENV !== 'production' && 
     typeof window === 'object' && 
@@ -8,7 +9,7 @@ const composeEnhancers = process.env.NODE_ENV !== 'production' &&
     })
     : compose;
 const configureStore = () => {
-    const middlewares = [];
+    const middlewares = [thunk];
     const enhancers = [applyMiddleware(...middlewares)];
     const store = legacy_createStore(rootReducer, composeEnhancers(...enhancers));
     return store;
